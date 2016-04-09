@@ -1,0 +1,16 @@
+_Store
+.project
+.classpath
+.idea
+*.log*
+*.iml
+vendor/
+composer.lock
+*.pyc
+bin/
+obj/
+*/*egg-info*/*
+build/
+dist/
+*.txt
+*/*.egg-info/*
