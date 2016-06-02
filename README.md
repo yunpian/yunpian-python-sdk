@@ -13,7 +13,7 @@ pip install yunpian-sdk-python
 2. 下载包[]()进行安装
 
 ```
-pip install yunpian-sdk-python-0.0.8.tar.gz
+pip install yunpian-sdk-python-1.0.0.tar.gz
 ```
 
 ### 使用
@@ -39,28 +39,12 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # 返回格式可参考官网:   www.yunpian.com
-# You can get the APIKEY and APISECRET from http://www.yunpian.com/ when log on.
+# You can get the APIKEY  from http://www.yunpian.com/ when log in.
 
 # 单条短信发送
 APIKEY='xxxxxx'
-API_SECRET='12345678'
 smsOperator = SmsOperator(APIKEY)
 result = smsOperator.single_send({'mobile': '13000000000', 'text': '【yunpian】您的验证码是4444'})
-print json.dumps(result.content, ensure_ascii=False)
-
-#
-# TEA加密短信发送
-mobile = Tea.encrypt_yunpian('13000000009', API_SECRET)
-text = Tea.encrypt_yunpian('【yunpian】您的验证码是4444', API_SECRET)
-result = smsOperator.single_send(
-    {'mobile': mobile, 'text': text, 'encrypt': Tea.encrypt_name})
-print json.dumps(result.content, ensure_ascii=False)
-
-# DES加密短信发送
-mobile = DES.encrypt_yunpian('13000000011', API_SECRET)
-text = DES.encrypt_yunpian('【yunpian】您的验证码是4444', API_SECRET)
-result = smsOperator.single_send(
-    {'mobile': mobile, 'text': text, 'encrypt': DES.encrypt_name})
 print json.dumps(result.content, ensure_ascii=False)
 
 #

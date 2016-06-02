@@ -19,7 +19,7 @@ _python_ver = platform.python_version()
 _session = None
 _headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
 
-
+# 发送Http请求
 def _init():
     pass
 

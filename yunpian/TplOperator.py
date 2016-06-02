@@ -7,7 +7,7 @@ from yunpian.Config import yunpian_config
 from yunpian.model.Result import Result
 from yunpian.HttpUtil import request_post
 
-
+# 模板短信发送类
 class TplOperator(object):
     def __init__(self, apikey=None, api_secret=None):
         if apikey == None:

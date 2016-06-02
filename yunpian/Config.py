@@ -5,10 +5,9 @@
 __author__ = 'bingone'
 yunpian_config={}
 
-# You can get the APIKEY and APISECRET from http://www.yunpian.com/ when log on.
+# You can get the APIKEY  from http://www.yunpian.com/ when log on.
 yunpian_config['APIKEY'] = ""
 
-yunpian_config['API_SECRET'] = ""
 
 
 
@@ -64,6 +63,7 @@ yunpian_config['URI_ADD_TEMPLATE'] = yunpian_config['SMS_HOST'] + yunpian_config
 yunpian_config['URI_UPD_TEMPLATE'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + "/tpl/update.json"
 yunpian_config['URI_DEL_TEMPLATE'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + "/tpl/del.json"
 
+# yunpian_config['API_SECRET'] = ""
 
 
 # print yunpian_config

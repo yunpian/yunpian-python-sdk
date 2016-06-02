@@ -5,7 +5,7 @@ import hashlib
 
 __author__ = 'bingone'
 
-
+# 签名计算方法
 class Sign:
     singName='_sign'
     @staticmethod

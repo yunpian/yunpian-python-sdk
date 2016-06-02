@@ -17,29 +17,14 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # 返回格式可参考官网:   www.yunpian.com
-# You can get the APIKEY and APISECRET from http://www.yunpian.com/ when log on.
+# You can get the APIKEY from http://www.yunpian.com/ when log on.
 
 # 单条短信发送
 APIKEY='xxxxxx'
-API_SECRET='12345678'
 smsOperator = SmsOperator(APIKEY)
 result = smsOperator.single_send({'mobile': '13004000020', 'text': '【yunpian】您的验证码是4444'})
 print json.dumps(result.content, ensure_ascii=False)
 
-#
-# TEA加密短信发送
-# 要生成带api_secret 的对象
-smsOperator = SmsOperator(APIKEY,API_SECRET)
-result = smsOperator.single_send(
-    {'mobile': '13000400001', 'text': '13400000001', 'encrypt': Tea.encrypt_name})
-print json.dumps(result.content, ensure_ascii=False)
-
-# DES加密短信发送
-# result = smsOperator.single_send(
-#     {'mobile': '13000000002', 'text': '13000000002', 'encrypt': DES.encrypt_name})
-# print json.dumps(result.content, ensure_ascii=False)
-
-#
 # 批量短信发送
 print json.dumps(smsOperator.batch_send({'mobile': '13000000001,13000000002', 'text': '【yunpian】您的验证码是0000'}).content,
                  ensure_ascii=False)

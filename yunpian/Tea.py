@@ -5,7 +5,7 @@ from ctypes import *
 import base64
 import struct
 __author__ = 'bingone'
-
+# Tea 加密算法
 
 class Tea(object):
 

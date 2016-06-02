@@ -6,7 +6,7 @@ __author__ = 'bingone'
 from yunpian.Config import yunpian_config
 from yunpian.HttpUtil import request_post
 
-
+# 用户信息操作
 class UserOperator(object):
     def __init__(self, apikey=None, api_secret=None):
         if apikey == None:
