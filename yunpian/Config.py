@@ -32,7 +32,7 @@ yunpian_config['VERSION'] = '/v2'
 yunpian_config['URI_SEND_SINGLE_SMS'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + "/sms/single_send.json"
 yunpian_config['URI_SEND_BATCH_SMS'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + "/sms/batch_send.json"
 yunpian_config['URI_SEND_MULTI_SMS'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + "/sms/multi_send.json"
-yunpian_config['URI_SEND_TPL_SINGLE_SMS'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + '/sms/tpl_signle_send.json'
+yunpian_config['URI_SEND_TPL_SINGLE_SMS'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + '/sms/tpl_single_send.json'
 yunpian_config['URI_SEND_TPL_BATCH_SMS'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + '/sms/tpl_batch_send.json'
 yunpian_config['URI_PULL_SMS_STATUS'] = yunpian_config['SMS_HOST'] + yunpian_config['VERSION'] + "/sms/pull_status.json"
 # 获取回复短信
