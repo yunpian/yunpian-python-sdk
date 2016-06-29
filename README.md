@@ -23,15 +23,14 @@ pip install yunpian-sdk-python-1.0.0.tar.gz
 # -*- coding:utf-8 -*-
 # filename:TestPost
 # 16/1/20 下午4:01
-from lib.DES import DES
+# from yunpian.DES import DES
 
 __author__ = 'bingone'
-from lib.SmsOperator import SmsOperator
-from lib.VoiceOperator import VoiceOperator
-from lib.TplOperator import TplOperator
-from lib.UserOperator import UserOperator
-from lib.FlowOperator import FlowOperator
-from lib.Tea import Tea
+from yunpian.SmsOperator import SmsOperator
+from yunpian.VoiceOperator import VoiceOperator
+from yunpian.TplOperator import TplOperator
+from yunpian.UserOperator import UserOperator
+from yunpian.FlowOperator import FlowOperator
 import sys
 import json
 
@@ -39,15 +38,14 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 # 返回格式可参考官网:   www.yunpian.com
-# You can get the APIKEY  from http://www.yunpian.com/ when log in.
+# You can get the APIKEY from http://www.yunpian.com/ when log on.
 
 # 单条短信发送
 APIKEY='xxxxxx'
 smsOperator = SmsOperator(APIKEY)
-result = smsOperator.single_send({'mobile': '13000000000', 'text': '【yunpian】您的验证码是4444'})
+result = smsOperator.single_send({'mobile': '13004000020', 'text': '【yunpian】您的验证码是4444'})
 print json.dumps(result.content, ensure_ascii=False)
 
-#
 # 批量短信发送
 print json.dumps(smsOperator.batch_send({'mobile': '13000000001,13000000002', 'text': '【yunpian】您的验证码是0000'}).content,
                  ensure_ascii=False)
@@ -57,23 +55,24 @@ print json.dumps(smsOperator.multi_send(
                  ensure_ascii=False)
 
 # 获取账号信息
-userOperator = UserOperator()
+userOperator = UserOperator(APIKEY)
 result = userOperator.get()
 print json.dumps(result.content,ensure_ascii=False)
 
 # 短信模板
-tplOperator = TplOperator()
+tplOperator = TplOperator(APIKEY)
 result = tplOperator.get()
 print json.dumps(result.content,ensure_ascii=False)
 print json.dumps(tplOperator.get_default({'tpl_id': '2'}).content, ensure_ascii=False)
 
 # 流量
-flowOperator = FlowOperator()
+flowOperator = FlowOperator(APIKEY)
 print json.dumps(flowOperator.recharge({'mobile': '18720085991', 'sn': '1008601'}).content, ensure_ascii=False)
 
 # 语音
-voiceOperator = VoiceOperator()
+voiceOperator = VoiceOperator(APIKEY)
 print json.dumps(voiceOperator.send({'mobile': '18720085991', 'code': '0012'}).content, ensure_ascii=False)
+
 
 ```
 
