@@ -10,7 +10,7 @@
 pip install yunpian-sdk-python
 ```
 
-2. 下载包[]()进行安装
+或者 下载包[]()进行安装
 
 ```
 pip install yunpian-sdk-python-1.0.0.tar.gz
@@ -23,7 +23,6 @@ pip install yunpian-sdk-python-1.0.0.tar.gz
 # -*- coding:utf-8 -*-
 # filename:TestPost
 # 16/1/20 下午4:01
-# from yunpian.DES import DES
 
 __author__ = 'bingone'
 from yunpian.SmsOperator import SmsOperator
@@ -37,11 +36,18 @@ import json
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-# 返回格式可参考官网:   www.yunpian.com
-# You can get the APIKEY from http://www.yunpian.com/ when log on.
-
+# 更多内容请参考 <url>https://www.yunpian.com/api2.0/howto.html</url>
+# 如您第一次使用云片网，强烈推荐先看云片网络设置教程 <url>https://blog.yunpian.com/?p=94</url>
+# 使用说明
+# 1、登陆 <url>http://www.yunpian.com/</url> 获取APIKEY
+# 2、使用APIKEY生成操作类SmsOperator/UserOperator/TplOperator/FlowOperator/VoiceOperator
+# 3、通过Result来接收返回值，通过ok()判断是否成功。具体可参考示例
+# 
+# 返回值参考
+# <url>https://www.yunpian.com/api2.0/sms.html</url>
+# <url>https://www.yunpian.com/api2.0/record.html</url>
 # 单条短信发送
-APIKEY='xxxxxx'
+APIKEY = 'xxxxxx'
 smsOperator = SmsOperator(APIKEY)
 result = smsOperator.single_send({'mobile': '13004000020', 'text': '【yunpian】您的验证码是4444'})
 print json.dumps(result.content, ensure_ascii=False)
@@ -49,20 +55,30 @@ print json.dumps(result.content, ensure_ascii=False)
 # 批量短信发送
 print json.dumps(smsOperator.batch_send({'mobile': '13000000001,13000000002', 'text': '【yunpian】您的验证码是0000'}).content,
                  ensure_ascii=False)
-# 个性化短信发送
-print json.dumps(smsOperator.multi_send(
-    {'mobile': '13000000003,13000000004', 'text': '【yunpian】您的验证码是4442,【yunpian】您的验证码是4441'}).content,
-                 ensure_ascii=False)
+
+# （这个是个性化接口发送，批量处理可能会产生耗时较长导致并发速度降低，不推荐使用）
+# print json.dumps(smsOperator.multi_send(
+#     {'mobile': '13000000003,13000000004', 'text': '【yunpian】您的验证码是4442,【yunpian】您的验证码是4441'}).content,
+#                   ensure_ascii=False)
+
+# （这个是指定模板单发接口发送，批量处理可能会产生耗时较长导致并发速度降低，不推荐使用）
+# print json.dumps(smsOperator.tpl_single_send({'mobile': '13000000001', 'text': '【yunpian】您的验证码是0000'}).content,
+#                   ensure_ascii=False)
+#
+# （这个是指定模板批量接口发送，批量处理可能会产生耗时较长导致并发速度降低，不推荐使用）
+# print json.dumps(smsOperator.tpl_batch_send({'mobile': '13000000001,13000000002', 'text': '【yunpian】您的验证码是0000'}).content,
+#                   ensure_ascii=False)
+#
 
 # 获取账号信息
 userOperator = UserOperator(APIKEY)
 result = userOperator.get()
-print json.dumps(result.content,ensure_ascii=False)
+print json.dumps(result.content, ensure_ascii=False)
 
 # 短信模板
 tplOperator = TplOperator(APIKEY)
 result = tplOperator.get()
-print json.dumps(result.content,ensure_ascii=False)
+print json.dumps(result.content, ensure_ascii=False)
 print json.dumps(tplOperator.get_default({'tpl_id': '2'}).content, ensure_ascii=False)
 
 # 流量
