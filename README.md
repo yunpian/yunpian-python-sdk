@@ -1,8 +1,10 @@
 
 # SDK使用指南
 
+本SDK适用于Python2，Python3版本在开发中，敬请期待。
+
 ---
-## python
+## python2
 ### 添加依赖包
 1. 使用pip安装依赖
 
