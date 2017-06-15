@@ -1,3 +1,5 @@
+*新python sdk已出，地址：https://github.com/yunpian/sms/tree/master/yunpian/python/ypclient ,支持py2/3*
+
 
 # SDK使用指南
 
