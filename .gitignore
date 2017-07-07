@@ -1,7 +1,25 @@
+# mac
 _Store
+
+# eclipse idea
 .project
-.classpath
 .idea
-*.pyc
 .settings/
 .pydevproject
+
+*.pyc
+*.pyo
+
+# general things to ignore
+build/
+dist/
+*.egg-info/
+*.egg
+*.py[cod]
+__pycache__/
+*.so
+*~
+
+# due to using tox and pytest
+.tox
+.cache
