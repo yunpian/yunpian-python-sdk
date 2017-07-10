@@ -3,17 +3,15 @@ Created on Jun 19, 2017
 
 @author: dzh
 '''
-from sdk.api.ypapi import YunpianApi, CommonResultHandler
-from sdk.model.constant import YP_SIGN_HOST, APIKEY, SIGN, VERSION_V2, OLD_SIGN
+from ..model.constant import (YP_SIGN_HOST, APIKEY, SIGN, VERSION_V2, OLD_SIGN)
+from .ypapi import YunpianApi, CommonResultHandler
 
 
 class SignApi(YunpianApi):
-    '''
-    签名接口 <a>https://www.yunpian.com/api2.0/sign.html</a>
-    '''
+    '''签名接口 https://www.yunpian.com/api2.0/sign.html'''
 
     def _init(self, clnt):
-        super.init(clnt)
+        super(SignApi, self)._init(clnt)
         self.host(clnt.conf(YP_SIGN_HOST, 'https://sms.yunpian.com'))
 
     def add(self, param={}):
@@ -50,7 +48,7 @@ class SignApi(YunpianApi):
         r = self.verify_param(param, [APIKEY, SIGN])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(self.version(), lambda v, rsp: {VERSION_V2:rsp[SIGN]}[v])
+        h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp[SIGN]}[self.version()])
         return self.path('add.json').post(param, h, r)
 
     def update(self, param={}):
@@ -96,7 +94,7 @@ class SignApi(YunpianApi):
         r = self.verify_param(param, [APIKEY, OLD_SIGN])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(self.version(), lambda v, rsp: {VERSION_V2:rsp[SIGN]}[v])
+        h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp[SIGN]}[self.version()])
         return self.path('update.json').post(param, h, r)
 
     def get(self, param={}):
@@ -128,5 +126,5 @@ class SignApi(YunpianApi):
         r = self.verify_param(param, [APIKEY])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(self.version(), lambda v, rsp: {VERSION_V2:rsp[SIGN]}[v])
+        h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp[SIGN]}[self.version()])
         return self.path('get.json').post(param, h, r)

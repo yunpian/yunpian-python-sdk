@@ -1,51 +1,73 @@
-'''
+'''Basic Yunpian API
 Created on Jul 6, 2017
 
 @author: dzh
 '''
 
-from sdk.api import flow, sign, sms, tpl, user, voice
-from sdk.model.constant import VERSION_V2, YP_VERSION, CHARSET_UTF8, VERSION_V1, \
-    CODE, APIKEY, MSG, DETAIL
-from sdk.model.result import Result, Code
-from pylint.checkers.utils import overrides_a_method
+from ..model.constant import VERSION_V2, YP_VERSION, CHARSET_UTF8, VERSION_V1, CODE, APIKEY, MSG, DETAIL, HTTP_CHARSET
+from ..model.result import Result, Code
 
 
-class ApiFactory(object):
-    '''Yunpian APIs Factory'''
+class ResultHandler(object):
+    '''interface to parse the response'''
 
-    def __init__(self, clnt):
-        assert clnt, "YunpianClient is None"
-        self.__clnt = clnt
+    def succ(self, code, rsp, r):
+        '''return success Result
+        Args:
+            code: = 0
+            rsp: a dict representing api's response
+            r: Result
+        Returns:
+            r
+        '''
+        raise NotImplementedError("implemented this")
 
-    def api(self, name):
-        '''return special API by package's name'''
-        assert name, "api name is None"
+    def fail(self, code, rsp, r):
+        '''return failure Result
+        Args:
+            code: != 0
+            rsp: a dict representing api's response
+            r: Result
+        Returns:
+            r
+        '''
+        raise NotImplementedError("implemented this")
 
-        api = None
-        if flow.__name__ == name:
-            api = flow.FlowApi()
-        elif sign.__name__ == name:
-            api = sign.SignApi()
-        elif sms.__name__ == name:
-            api = sms.SmsApi()
-        elif tpl.__name__ == name:
-            api = tpl.TplApi()
-        elif user.__name__ == name:
-            api = user.UserApi()
-        elif voice.__name__ == name:
-            api = voice.VoiceApi()
+    def catch_exception(self, e, r):
+        '''return exception Result
+        Args:
+            e: Error
+            rsp: a dict representing api's response
+            r: Result
+        Returns:
+            r
+        '''
+        raise NotImplementedError("implemented this")
 
-        assert api, "not found api-" + name
+class CommonResultHandler(ResultHandler):
 
-        api._init(self.__clnt)
-        return api
+    def __init__(self, func):
+        '''return exception Result
+        Args:
+            version: api's version
+            func: Result receive data by calling func(version,rsp)
+        '''
+        self._func = func
+
+    def succ(self, code, rsp, r):
+        return r.code(code, True).msg(rsp.get(MSG), True).data(self._func(rsp), True)
+
+    def fail(self, code, rsp, r):
+        return r.code(code, True).msg(rsp.get(MSG), True).detail(rsp.get(DETAIL), True)
+
+    def catch_exception(self, e, r):
+        return r.code(Code.UNKNOWN_EXCEPTION, True).exception(e, True)
 
 class YunpianApiResult(object):
     '''interface to retrieve the Result from the response'''
 
     def result(self, rsp, h, r=Result()):
-        ''' 
+        '''
         Args:
             rsp: a dict representing api's response
             h: ResultHandler
@@ -58,7 +80,7 @@ class YunpianApiResult(object):
     def code(self, rsp, version=VERSION_V2):
         '''
         Args:
-            rsp: a dict representing api's response
+            rsp: a dict object representing api's response
             version: api's version
         Returns:
             api's int code
@@ -66,51 +88,59 @@ class YunpianApiResult(object):
         raise NotImplementedError("implemented this")
 
 class YunpianApi(YunpianApiResult):
-    '''
-    basic API object
-    '''
+    '''basic API object'''
 
     def _init(self, clnt):
         '''initialize api by YunpianClient'''
         assert clnt, "clnt is None"
-        self.clnt = clnt
-        self.apikey = clnt.apikey()
-        self.version = clnt.conf(YP_VERSION, defval=VERSION_V2)
-        self.charset = clnt.conf(self.HTTP_CHARSET, defval=CHARSET_UTF8)
+        self._clnt = clnt
+        self._apikey = clnt.apikey()
+        self._version = clnt.conf(YP_VERSION, defval=VERSION_V2)
+        self._charset = clnt.conf(HTTP_CHARSET, defval=CHARSET_UTF8)
+        self._name = self.__class__.__module__.split('.')[-1]
 
     def client(self, clnt=None):
-        if clnt :
-            self.clnt = clnt
-        return self.clnt
+        if clnt:
+            self._clnt = clnt
+            return self
+        return self._clnt
 
     def host(self, host=None):
         if host:
-            self.host = host
-        return self.host
+            self._host = host
+            return self
+        return self._host
 
     def version(self, version=None):
-        if version :
-            self.version = version
-        return self.version
+        if version:
+            self._version = version
+            return self
+        return self._version
 
     def path(self, path=None):
-        if path :
-            self.path = path
-        return self.path
+        if path:
+            self._path = path
+            return self
+        return self._path
 
     def apikey(self, apikey=None):
-        if apikey :
-            self.apikey = apikey
-        return self.apikey
+        if apikey:
+            self._apikey = apikey
+            return self
+        return self._apikey
 
     def charset(self, charset=None):
-        if charset :
-            self.charset = charset
-        return self.charset
+        if charset:
+            self._charset = charset
+            return self
+        return self._charset
 
-    def name(self):
-        '''api name, default is package.__name__'''
-        return __name__
+    def name(self, name=None):
+        '''api name, default is module.__name__'''
+        if name:
+            self._name = name
+            return self
+        return self._name
 
     def uri(self):
         return '{}/{}/{}/{}'.format(self.host(), self.version(), self.name(), self.path())
@@ -124,92 +154,35 @@ class YunpianApi(YunpianApiResult):
             r: YunpianApiResult
         '''
         try:
-            rsp = self.clnt.post(self.uri(), param={})
+            rsp = self.client().post(self.uri(), param)
             return self.result(rsp, h, r)
         except ValueError as err:
             return h.catch_exception(err, r)
 
     def result(self, rsp, h, r=Result()):
         code = self.code(rsp, self.version())
-        return h.succ(code, rsp, r) if code == Code.OK else h.fail(code, rsp, r)
+        return h.succ(code, rsp, r) if code == Code.SUCC else h.fail(code, rsp, r)
 
     def code(self, rsp, version=VERSION_V2):
-        if rsp is None:return Code.OK
+        if rsp is None:
+            return Code.SUCC
 
         code = Code.UNKNOWN_EXCEPTION
-        if version == VERSION_V1 :
+        if version == VERSION_V1:
             code = int(rsp[CODE]) if CODE in rsp else Code.UNKNOWN_EXCEPTION
         elif version == VERSION_V2:
-            code = int(rsp[CODE]) if CODE in rsp else Code.OK
+            code = int(rsp[CODE]) if CODE in rsp else Code.SUCC
 
         return code
 
     def verify_param(self, param={}, must=[], r=Result()):
         '''return Code.ARGUMENT_MISSING if every key in must not found in param'''
         if APIKEY not in param:
-            param[APIKEY] = self.apikey
+            param[APIKEY] = self.apikey()
 
         for p in must:
             if p not in param:
-                r.code(Code.ARGUMENT_MISSING).detail(p)
+                r.code(Code.ARGUMENT_MISSING).detail('missing-' + p)
                 break
 
         return r
-
-class ResultHandler(object):
-    '''interface to parse the response'''
-
-    def succ(self, code, rsp, r):
-        ''' return success Result
-        Args:
-            code: = 0
-            rsp: a dict representing api's response
-            r: Result
-        Returns:
-            r
-        '''
-        raise NotImplementedError("implemented this")
-
-    def fail(self, code, rsp, r):
-        ''' return failure Result
-        Args:
-            code: != 0
-            rsp: a dict representing api's response
-            r: Result
-        Returns:
-            r
-        '''
-        raise NotImplementedError("implemented this")
-
-    def catch_exception(self, e, r):
-        ''' return exception Result
-        Args:
-            e: Error
-            rsp: a dict representing api's response
-            r: Result
-        Returns:
-            r
-        '''
-        raise NotImplementedError("implemented this")
-
-def CommonResultHandler(ResultHandler):
-
-    def __init__(self, version, func):
-        ''' return exception Result
-        Args:
-            version: api's version
-            func: Result receive data by calling func(version,rsp)
-        '''
-        self.__version = version
-        self.__func = func
-
-    @overrides_a_method
-    def succ(self, code, rsp, r=Result()):
-        return r.code(code).msg(rsp[MSG] if MSG in rsp else None).data(self.__func(self.__version, rsp))
-
-    def fail(self, code, rsp, r=Result()):
-        return r.code(code).msg(rsp[MSG] if MSG in rsp else None).detail(rsp[DETAIL] if DETAIL in rsp else None)
-
-    def catch_exception(self, e, r=Result()):
-        return r.code(Code.UNKNOWN_EXCEPTION).exception(e, True)
-

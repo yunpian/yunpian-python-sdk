@@ -18,7 +18,7 @@ from yunpian.sdk.ypclient import YunpianClient
 #初始化client,apikey作为所有请求的默认值
 clnt = YunpianClient('apikey');
 
-param = [YPCONST.MOBILE:'18616020***',YPCONST.TEXT:'【云片网】您的验证码是1234'];
+param = {YPCONST.MOBILE:'18616020***',YPCONST.TEXT:'【云片网】您的验证码是1234'};
 r = clnt.sms().single_send(param);
 #获取返回结果, 返回码:r.code(), 返回码描述:r.msg(),API结果:r.data(),其他说明:r.detail(),调用异常:r.exception()
 
@@ -31,12 +31,12 @@ r = clnt.sms().single_send(param);
 - 构造器配置
     - `YunpianClient('apikey');`
     - `YunpianClient('apikey',conf);`, conf字典key详见model.constant.YP_*
-- apikey的优先级:接口的param[APIKEY] > 构造器的apikey > 构造器的conf[YP_APIKEY] > yunpian.ini
+- apikey的优先级:接口的param[APIKEY] > 构造器的apikey > 构造器的conf[YP_APIKEY]
 
 ## 源码说明
 - github地址[yunpian-python-sdk](https://github.com/yunpian/yunpian-python-sdk)
 - API单元测试tests/api
-- 分支说明: master是最新文档发布版本，develop是开发分支(开源贡献request到这个分支)
+- 分支说明: master是最新文档发布版本，develop是开发分支(开源贡献pull request到develop分支)
 
 ## 联系我们
 [云片支持 QQ](https://static.meiqia.com/dist/standalone.html?eid=30951&groupid=0d20ab23ab4702939552b3f81978012f&metadata={"name":"github"})

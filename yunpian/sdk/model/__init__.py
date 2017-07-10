@@ -1,5 +1,5 @@
 '''
-    
+API Constant and Result class
 '''
 
-__all__ = ['result','constant']
+__all__ = ['result', 'constant']
