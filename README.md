@@ -4,50 +4,39 @@ yunpian-python-sdk
 
 ## 快速开始
 
-setuptools setup.p
-py.test 单元测试
-tox 标准化测试
-Sphinx 自动生成HTML文档
-pypi
-cheesecake 
-
-
-- 添加composer依赖
-
-```json
-"require" : {
-        "yunpian/yunpian-php-sdk" : "~1.0"
-    }
+- 安装SDK
+```python
+pip install yunpian-python-sdk
 ```
-**注**: master是最新稳定版,发布版本见[PyPI](https://packagist.org/explore/)
+**注**: master是最新稳定版,发布版本见[PyPI](https://pypi.python.org/pypi)
 
 - 使用YunpianClient
-
 ```python
-use \Yunpian\Sdk\YunpianClient;
+from yunpian.sdk.model import constant as YPCONST
+from yunpian.sdk.ypclient import YunpianClient
 
-//初始化client,apikey作为所有请求的默认值
-$clnt = YunpianClient::create($apikey);
+#初始化client,apikey作为所有请求的默认值
+clnt = YunpianClient('apikey');
 
-$param = [YunpianClient::MOBILE => '18616020000',YunpianClient::TEXT => '【云片网】您的验证码是1234'];
-$r = $clnt->sms()->single_send($param);
-var_dump($r);
+param = [YPCONST.MOBILE:'18616020***',YPCONST.TEXT:'【云片网】您的验证码是1234'];
+r = clnt.sms().single_send(param);
+#获取返回结果, 返回码:r.code(), 返回码描述:r.msg(),API结果:r.data(),其他说明:r.detail(),调用异常:r.exception()
 
-//账户 $clnt->user() 签名 $clnt->sign() 模版 $clnt->tpl() 短信 $clnt->sms() 语音 $clnt->voice() 流量 $clnt->flow()
+#短信:clnt.sms() 账户:clnt.user() 签名:clnt.sign() 模版:clnt.tpl() 语音:clnt.voice() 流量:clnt.flow()
 ```
-**注**: v1.0开始使用composer管理工程。不兼容之前版本，若需要可从github下载[0.0.1](https://github.com/yunpian/yunpian-php-sdk/releases/tag/0.0.1)
+**注**: v1.0.0不兼容之前版本[0.0.8](https://github.com/yunpian/yunpian-python-sdk/releases/tag/0.0.8)
 
 ## 配置说明 (默认配置就行)
-- 默认配置文件 src/yunpian.ini
+- 默认配置文件 yunpian/sdk/yunpian.ini
 - 构造器配置
-    - `YunpianClient::create($apikey);`
-    - `YunpianClient::create($apikey,$conf);`
-- apikey的优先级 函数的$param[YunpianConstant::APIKEY] > 构造器的$apikey > 构造器的$conf[YunpianConstant::YP_APIKEY] > yunpian.ini
+    - `YunpianClient('apikey');`
+    - `YunpianClient('apikey',conf);`, conf字典key详见model.constant.YP_*
+- apikey的优先级:接口的param[APIKEY] > 构造器的apikey > 构造器的conf[YP_APIKEY] > yunpian.ini
 
-## 源码说明 yunpian-python-sdk
-- 工程使用composer构造，php5.6 or higher
-- 开发API可参考单元测试 tests/Api
-- 执行单元测试 `phpunit tests`，安装[phpunit](https://phpunit.de/manual/5.7/en/installation.html)
+## 源码说明
+- github地址[yunpian-python-sdk](https://github.com/yunpian/yunpian-python-sdk)
+- API单元测试tests/api
+- 分支说明: master是最新文档发布版本，develop是开发分支(开源贡献request到这个分支)
 
 ## 联系我们
 [云片支持 QQ](https://static.meiqia.com/dist/standalone.html?eid=30951&groupid=0d20ab23ab4702939552b3f81978012f&metadata={"name":"github"})

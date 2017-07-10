@@ -14,7 +14,7 @@ class SmsApi(YunpianApi):
     短信接口 <a>https://www.yunpian.com/api2.0/sms.html</a>
     '''
 
-    def init(self, clnt):
+    def _init(self, clnt):
         super.init(clnt)
         self.host(clnt.conf(YP_SMS_HOST, 'https://sms.yunpian.com'))
 

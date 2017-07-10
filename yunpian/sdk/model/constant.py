@@ -13,9 +13,7 @@ HTTP_CONN_MAXTOTAL = 'http.conn.maxtotal';
 HTTP_SSL_KEYSTORE = 'http.ssl.keystore';
 HTTP_SSL_PASSWD = 'http.ssl.passwd';
 
-CHARSET_UTF8 = 'utf-8';
-
-# ************************** yunapian.properties ************************************
+# ************************** yunapian.ini ************************************
 YP_FILE = 'yp.file';
 YP_APIKEY = 'yp.apikey';
 YP_VERSION = 'yp.version';
@@ -32,6 +30,8 @@ VERSION_V1 = 'v1';
 VERSION_V2 = 'v2';
 
 APIKEY = 'apikey';
+
+CHARSET_UTF8 = 'utf-8';
 
 # 返回值字段
 CODE = 'code';

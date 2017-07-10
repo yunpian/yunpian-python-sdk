@@ -33,12 +33,12 @@ class YunpianClient(object):
         '''
         Args:
             apikey: apikey
-            conf: custom config to initialize ypconf
+            conf: custom config to initialize ypconf,keys like yp.*
         '''
         if apikey is None:
             apikey = conf[YP_APIKEY]
         assert apikey , "apikey is nil"
-        self.__ypconf = YunpianConf().customApikey(apikey).customConf(conf)
+        self.__ypconf = YunpianConf().custom_conf(conf).custom_apikey(apikey)
         self.__api = ApiFactory(self)
 
     def flow(self):
@@ -104,11 +104,11 @@ class YunpianConf(object):
             for (k, v) in config.items(section):
                 self.__conf[k] = v
 
-    def customApikey(self, apikey):
+    def custom_apikey(self, apikey):
         self.__conf[YP_APIKEY] = apikey
         return self;
 
-    def customConf(self, conf={}):
+    def custom_conf(self, conf={}):
         for (k, v) in conf.items():
             self.__conf[k] = v
         return self

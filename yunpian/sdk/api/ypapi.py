@@ -8,6 +8,7 @@ from sdk.api import flow, sign, sms, tpl, user, voice
 from sdk.model.constant import VERSION_V2, YP_VERSION, CHARSET_UTF8, VERSION_V1, \
     CODE, APIKEY, MSG, DETAIL
 from sdk.model.result import Result, Code
+from pylint.checkers.utils import overrides_a_method
 
 
 class ApiFactory(object):
@@ -37,7 +38,7 @@ class ApiFactory(object):
 
         assert api, "not found api-" + name
 
-        api.init(self.__clnt)
+        api._init(self.__clnt)
         return api
 
 class YunpianApiResult(object):
@@ -69,7 +70,7 @@ class YunpianApi(YunpianApiResult):
     basic API object
     '''
 
-    def init(self, clnt):
+    def _init(self, clnt):
         '''initialize api by YunpianClient'''
         assert clnt, "clnt is None"
         self.clnt = clnt
@@ -202,10 +203,11 @@ def CommonResultHandler(ResultHandler):
         self.__version = version
         self.__func = func
 
+    @overrides_a_method
     def succ(self, code, rsp, r=Result()):
         return r.code(code).msg(rsp[MSG] if MSG in rsp else None).data(self.__func(self.__version, rsp))
 
-    def faili(self, code, rsp, r=Result()):
+    def fail(self, code, rsp, r=Result()):
         return r.code(code).msg(rsp[MSG] if MSG in rsp else None).detail(rsp[DETAIL] if DETAIL in rsp else None)
 
     def catch_exception(self, e, r=Result()):

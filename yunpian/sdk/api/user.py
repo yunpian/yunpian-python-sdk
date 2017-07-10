@@ -13,7 +13,7 @@ class UserApi(YunpianApi):
     用户接口 <a>https://www.yunpian.com/api2.0/user.html</a>
     '''
 
-    def init(self, clnt):
+    def _init(self, clnt):
         super.init(clnt)
         self.host(clnt.conf(YP_USER_HOST, 'https://sms.yunpian.com'))
 

@@ -13,7 +13,7 @@ class VoiceApi(YunpianApi):
     语音验证码、语音通知接口 <a>https://www.yunpian.com/api2.0/voice.html</a>
     '''
 
-    def init(self, clnt):
+    def _init(self, clnt):
         super.init(clnt)
         self.host(clnt.conf(YP_VOICE_HOST, 'https://voice.yunpian.com'))
 

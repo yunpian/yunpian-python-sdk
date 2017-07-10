@@ -12,7 +12,7 @@ class SignApi(YunpianApi):
     签名接口 <a>https://www.yunpian.com/api2.0/sign.html</a>
     '''
 
-    def init(self, clnt):
+    def _init(self, clnt):
         super.init(clnt)
         self.host(clnt.conf(YP_SIGN_HOST, 'https://sms.yunpian.com'))
 

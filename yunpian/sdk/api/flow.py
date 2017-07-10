@@ -11,7 +11,7 @@ from sdk.model.constant import APIKEY, YP_FLOW_HOST, VERSION_V1, FLOW_PACKAGE, \
 class FlowApi(YunpianApi):
     '''流量接口 <a>https://www.yunpian.com/api2.0/api-flow.html</a>'''
 
-    def init(self, clnt):
+    def _init(self, clnt):
         super.init(clnt)
         self.host(clnt.conf(YP_FLOW_HOST, 'https://flow.yunpian.com'))
 
