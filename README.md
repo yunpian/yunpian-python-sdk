@@ -12,8 +12,8 @@ pip install yunpian-python-sdk
 
 - 使用YunpianClient
 ```python
-from yunpian.sdk.model import constant as YPCONST
-from yunpian.sdk.ypclient import YunpianClient
+from yunpian_python_sdk.model import constant as YPCONST
+from yunpian_python_sdk.ypclient import YunpianClient
 
 #初始化client,apikey作为所有请求的默认值
 clnt = YunpianClient('apikey');
@@ -27,7 +27,7 @@ r = clnt.sms().single_send(param);
 **注**: v1.0.0不兼容之前版本[0.0.8](https://github.com/yunpian/yunpian-python-sdk/releases/tag/0.0.8)
 
 ## 配置说明 (默认配置就行)
-- 默认配置文件 yunpian/sdk/yunpian.ini
+- 默认配置文件 yunpian_python_sdk/yunpian.ini
 - 构造器配置
     - `YunpianClient('apikey');`
     - `YunpianClient('apikey',conf);`, conf字典key详见model.constant.YP_*

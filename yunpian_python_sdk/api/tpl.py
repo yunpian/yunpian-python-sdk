@@ -31,7 +31,7 @@ class TplApi(YunpianApi):
         r = self.verify_param(param, [APIKEY])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[TEMPLATE] if TEMPLATE in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_default.json').post(param, h, r)
 
 
@@ -50,7 +50,7 @@ class TplApi(YunpianApi):
         r = self.verify_param(param, [APIKEY])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(TEMPLATE), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[TEMPLATE] if TEMPLATE in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get.json').post(param, h, r)
 
 
