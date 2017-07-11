@@ -15,22 +15,17 @@ yunpian-python-sdk
    **注**:
    master是最新稳定版,发布版本见\ `PyPI <https://pypi.python.org/pypi>`__
 
--  使用YunpianClient \`\`\`python from yunpian\_python\_sdk.model import
-   constant as YC from yunpian\_python\_sdk.ypclient import
-   YunpianClient
+-  使用YunpianClient 
 
-初始化client,apikey作为所有请求的默认值
-=======================================
-
-clnt = YunpianClient('apikey');
-
-param =
-{YC.MOBILE:'18616020\*\*\*',YC.TEXT:'【云片网】您的验证码是1234'}; r =
-clnt.sms().single\_send(param); #获取返回结果, 返回码:r.code(),
-返回码描述:r.msg(),API结果:r.data(),其他说明:r.detail(),调用异常:r.exception()
-
-短信:clnt.sms() 账户:clnt.user() 签名:clnt.sign() 模版:clnt.tpl() 语音:clnt.voice() 流量:clnt.flow()
-====================================================================================================
+   .. code:: python
+     
+        from yunpian_python_sdk.model import constant as YC
+        from yunpian_python_sdk.ypclient import YunpianClient
+        # 初始化client,apikey作为所有请求的默认值
+        param = {YC.MOBILE:'18616020\*\*\*',YC.TEXT:'【云片网】您的验证码是1234'}
+        r = clnt.sms().single_send(param)
+        # 获取返回结果, 返回码:r.code(),返回码描述:r.msg(),API结果:r.data(),其他说明:r.detail(),调用异常:r.exception()
+        # 短信:clnt.sms() 账户:clnt.user() 签名:clnt.sign() 模版:clnt.tpl() 语音:clnt.voice() 流量:clnt.flow()
 
 \`\`\` **注**:
 v1.0.0不兼容之前版本\ `0.0.8 <https://github.com/yunpian/yunpian-python-sdk/releases/tag/0.0.8>`__
