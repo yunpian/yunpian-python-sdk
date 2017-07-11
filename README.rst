@@ -58,7 +58,7 @@ v1.0.0不兼容之前版本\ `0.0.8 <https://github.com/yunpian/yunpian-python-s
 QQ <https://static.meiqia.com/dist/standalone.html?eid=30951&groupid=0d20ab23ab4702939552b3f81978012f&metadata=%7B%22name%22:%22github%22%7D>`__
 
 SDK开源QQ群
-.. figure:: docs/sdk_qq.jpeg
+.. image:: docs/sdk_qq.jpeg
 
 文档链接
 --------
