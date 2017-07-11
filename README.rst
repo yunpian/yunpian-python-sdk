@@ -60,7 +60,8 @@ QQ <https://static.meiqia.com/dist/standalone.html?eid=30951&groupid=0d20ab23ab4
 SDK开源QQ群
 
 .. image:: /docs/sdk_qq.jpeg
-
+   :height: 100px
+   :width: 200 px
 文档链接
 --------
 
