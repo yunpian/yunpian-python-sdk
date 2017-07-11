@@ -41,7 +41,7 @@ r = clnt.sms().single_send(param)
 ## 联系我们
 [云片支持 QQ](https://static.meiqia.com/dist/standalone.html?eid=30951&groupid=0d20ab23ab4702939552b3f81978012f&metadata={"name":"github"})
 
-SDK开源QQ群
+SDK开源QQ群: 106469530
 
 <img src="docs/sdk_qq.jpeg" width="15%" alt="SDK开源QQ群"/>
 
