@@ -29,13 +29,14 @@ r = clnt.sms().single_send(param);
 ## 配置说明 (默认配置就行)
 - 默认配置文件 yunpian_python_sdk/yunpian.ini
 - 构造器配置
-    - `YunpianClient('apikey');`
-    - `YunpianClient('apikey',conf);`, conf字典key详见model.constant.YP_*
+    - `YunpianClient('apikey')`
+    - `YunpianClient('apikey',conf)`, conf字典key详见model.constant.YP_*
 - apikey的优先级:接口的param[APIKEY] > 构造器的apikey > 构造器的conf[YP_APIKEY]
 
 ## 源码说明
-- API单元测试tests/api
-- 分支说明: master是最新文档发布版本，develop是开发分支(开源贡献pull request到develop分支)
+- 接口默认使用v2版本,可以在调用时指定版本,如`clnt.sms().version('v1').single_send(param)`
+- API单元测试目录tests,支持tox.ini
+- 分支说明: master是最新文档发布版本,develop是开发分支(开源贡献pull request到develop分支)
 
 ## 联系我们
 [云片支持 QQ](https://static.meiqia.com/dist/standalone.html?eid=30951&groupid=0d20ab23ab4702939552b3f81978012f&metadata={"name":"github"})
@@ -46,3 +47,6 @@ SDK开源QQ群
 
 ## 文档链接
 - [api文档](https://www.yunpian.com/api2.0/guide.html)
+
+## 其他SDK库
+- https://github.com/yunpian/sms/tree/master/yunpian/python/ypclient 支持py2/3

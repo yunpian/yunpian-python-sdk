@@ -23,23 +23,23 @@ class TestYunpianClient(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_YunpianConf(self):
+    def _test_YunpianConf(self):
         print(__name__)
         conf = _YunpianConf()
         self.assertEqual(conf.conf(YP_VERSION), "v2")
         self.assertEqual(conf.conf(HTTP_CONN_TIMEOUT), "10")
 
-    def _test_uri(self):
+    def test_uri(self):
         url = '{}/{}/{}/{}'.format('https://test-api.yunpian.com', 'v2', 'user', 'get.json')
         self.assertEqual('https://test-api.yunpian.com/v2/user/get.json', url)
 
-        r = requests.get(url)
+        r = requests.get('https://www.yunpian.com/')
         print(r.status_code)
 
     def _test_name(self):
         print(sys.modules[__name__])
 
-    def test_requests(self):
+    def _test_requests(self):
         r = requests.get('https://github.com/dzh')
         print(r.status_code)
 
