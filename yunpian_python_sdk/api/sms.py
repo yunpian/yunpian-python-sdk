@@ -4,10 +4,9 @@ Created on Jun 19, 2017
 
 @author: dzh
 '''
-from model.constant import (
+from ..model.constant import (
     YP_SMS_HOST, APIKEY, MOBILE, TEXT, VERSION_V1, RESULT, VERSION_V2, SMS_STATUS, SMS_REPLY, START_TIME,
     END_TIME, PAGE_NUM, PAGE_SIZE, SMS, TOTAL, TPL_ID, TPL_VALUE)
-
 from .ypapi import YunpianApi, CommonResultHandler
 
 

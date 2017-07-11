@@ -4,8 +4,7 @@ Created on Jun 19, 2017
 
 @author: dzh
 '''
-from model.constant import (YP_SIGN_HOST, APIKEY, SIGN, VERSION_V2, OLD_SIGN)
-
+from ..model.constant import (YP_SIGN_HOST, APIKEY, SIGN, VERSION_V2, OLD_SIGN)
 from .ypapi import YunpianApi, CommonResultHandler
 
 

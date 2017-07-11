@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on Jul 4, 2017
 
@@ -5,8 +6,10 @@ Created on Jul 4, 2017
 '''
 import unittest
 
-from model.constant import (MOBILE, TEXT, TPL_ID, TPL_VALUE, PAGE_SIZE, VERSION_V1, START_TIME, END_TIME, PAGE_NUM)
-from testapi import TestYunpianApi
+from yunpian_python_sdk.model.constant import (
+    MOBILE, TEXT, TPL_ID, TPL_VALUE, PAGE_SIZE, VERSION_V1, START_TIME, END_TIME, PAGE_NUM)
+
+from . import TestYunpianApi
 
 
 class TestSmsApi(TestYunpianApi):
@@ -15,7 +18,7 @@ class TestSmsApi(TestYunpianApi):
     def _test_single_send(self):
         clnt = self._clnt;
 
-        param = {MOBILE : '18616020000', TEXT : '【云片网】您的验证码是1234'}
+        param = {MOBILE:'18616020000', TEXT:'【云片网】您的验证码是1234'}
         r = clnt.sms().single_send(param)
         self.show(r)
 

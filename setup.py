@@ -28,7 +28,6 @@ KWARGS = dict(
         'Natural Language :: Chinese (Simplified)',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
@@ -38,9 +37,9 @@ KWARGS = dict(
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
     keywords='yunpian sdk',
-    packages=find_packages(exclude=['docs', 'tests', 'dist']),
+    packages=find_packages(exclude=['dist']),
     install_requires=['requests>=2'],
-    python_requires='>=2.6, !=3.0.*, !=3.1.*, !=3.2.*, <4',
+    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4',
     # $ pip install -e .[dev,test]
     extras_require={
         # 'dev': ['check-manifest'],

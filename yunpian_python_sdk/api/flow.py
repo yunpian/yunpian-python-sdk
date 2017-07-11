@@ -5,8 +5,7 @@ Created on Jun 19, 2017
 @author: dzh
 '''
 
-from model.constant import (APIKEY, YP_FLOW_HOST, VERSION_V1, FLOW_PACKAGE, VERSION_V2, MOBILE, RESULT, FLOW_STATUS, SN)
-
+from ..model.constant import (APIKEY, YP_FLOW_HOST, VERSION_V1, FLOW_PACKAGE, VERSION_V2, MOBILE, RESULT, FLOW_STATUS, SN)
 from .ypapi import YunpianApi, CommonResultHandler
 
 

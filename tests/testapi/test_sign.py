@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on Jul 4, 2017
 
@@ -5,8 +6,10 @@ Created on Jul 4, 2017
 '''
 import unittest
 
-from model.constant import (SIGN, NOTIFY, APPLYVIP, ISONLYGLOBAL, INDUSTRYTYPE, OLD_SIGN, PAGE_NUM, PAGE_SIZE)
-from testapi import TestYunpianApi
+from yunpian_python_sdk.model.constant import (
+    SIGN, NOTIFY, APPLYVIP, ISONLYGLOBAL, INDUSTRYTYPE, OLD_SIGN, PAGE_NUM, PAGE_SIZE)
+
+from . import TestYunpianApi
 
 
 class TestSignApi(TestYunpianApi):

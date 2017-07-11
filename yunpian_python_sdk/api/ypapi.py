@@ -5,8 +5,8 @@ Created on Jul 6, 2017
 @author: dzh
 '''
 
-from model.constant import (VERSION_V2, YP_VERSION, CHARSET_UTF8, VERSION_V1, CODE, APIKEY, MSG, DETAIL, HTTP_CHARSET)
-from model.result import Result, Code
+from ..model.constant import (VERSION_V2, YP_VERSION, CHARSET_UTF8, VERSION_V1, CODE, APIKEY, MSG, DETAIL, HTTP_CHARSET)
+from ..model.result import Result, Code
 
 
 class ResultHandler(object):

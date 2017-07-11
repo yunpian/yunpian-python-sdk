@@ -16,23 +16,39 @@ import json
 
 import requests
 
-from api import flow, sign, sms, tpl, user, voice
-from model.constant import (CHARSET_UTF8, YP_APIKEY, HTTP_CONN_TIMEOUT, HTTP_SO_TIMEOUT)
+from .api import flow, sign, sms, tpl, user, voice
+from .model.constant import (CHARSET_UTF8, YP_APIKEY, HTTP_CONN_TIMEOUT, HTTP_SO_TIMEOUT)
 
 
 class _YunpianConf(object):
     '''SDK Configuration'''
 
+    # yunpian default config
+    YP_CONF = {
+               'http.conn.timeout':'10',
+               'http.so.timeout':'30',
+               'http.charset':'utf-8',
+               'yp.version':'v2',
+               'yp.user.host':'https://sms.yunpian.com',
+               'yp.sign.host':'https://sms.yunpian.com',
+               'yp.tpl.host':'https://sms.yunpian.com',
+               'yp.sms.host':'https://sms.yunpian.com',
+               'yp.voice.host':'https://voice.yunpian.com',
+               'yp.flow.host':'https://flow.yunpian.com',
+               'yp.call.host':'https://call.yunpian.com'
+    }
+
     def __init__(self):
-        import configparser
-        from os import path
         # load yunpian.ini
-        config = configparser.ConfigParser()
-        config.read(path.join(path.abspath(path.dirname(__file__)), 'yunpian.ini'), CHARSET_UTF8)
+#         import configparser
+#         from os import path
+#         config = configparser.ConfigParser()
+#         config.read(path.join(path.abspath(path.dirname(__file__)), 'yunpian.ini'), CHARSET_UTF8)
+#         self.__conf = {}
+#         for section in config.sections():
+#             for (key, val) in config.items(section):
+#                 self.__conf[key] = val
         self.__conf = {}
-        for section in config.sections():
-            for (key, val) in config.items(section):
-                self.__conf[key] = val
 
     def custom_apikey(self, apikey):
         '''custom apikey'''
@@ -56,7 +72,8 @@ class _YunpianConf(object):
 
     def conf(self, key):
         '''get config'''
-        return self.__conf[key] if key in self.__conf else None
+        return self.__conf[key] if key in self.__conf else _YunpianConf.YP_CONF.get(key)
+
 
 class _ApiFactory(object):
     '''Yunpian APIs Factory'''
@@ -86,6 +103,7 @@ class _ApiFactory(object):
 
         api._init(self._clnt)
         return api
+
 
 class YunpianClient(object):
     '''
