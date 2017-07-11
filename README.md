@@ -36,7 +36,7 @@ r = clnt.sms().single_send(param);
 ## 源码说明
 - 接口默认使用v2版本,可以在调用时指定版本,如`clnt.sms().version('v1').single_send(param)`
 - API单元测试目录tests,支持tox.ini
-- 分支说明: master是最新文档发布版本,develop是开发分支(开源贡献pull request到develop分支)
+- 分支说明: master是最新发布版本,develop是待发布的分支(开源贡献可以pull request到develop分支)
 
 ## 联系我们
 [云片支持 QQ](https://static.meiqia.com/dist/standalone.html?eid=30951&groupid=0d20ab23ab4702939552b3f81978012f&metadata={"name":"github"})
@@ -46,7 +46,7 @@ SDK开源QQ群
 <img src="docs/sdk_qq.jpeg" width="15%" alt="SDK开源QQ群"/>
 
 ## 文档链接
-- [api文档](https://www.yunpian.com/api2.0/guide.html)
+- [API文档](https://www.yunpian.com/api2.0/guide.html)
 
 ## 其他SDK库
 - https://github.com/yunpian/sms/tree/master/yunpian/python/ypclient 支持py2/3
