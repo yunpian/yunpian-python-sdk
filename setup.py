@@ -39,7 +39,8 @@ KWARGS = dict(
     ],
     keywords='yunpian sdk',
     packages=find_packages(exclude=['docs', 'tests', 'dist']),
-    install_requires=[],
+    install_requires=['requests>=2'],
+    python_requires='>=2.6, !=3.0.*, !=3.1.*, !=3.2.*, <4',
     # $ pip install -e .[dev,test]
     extras_require={
         # 'dev': ['check-manifest'],

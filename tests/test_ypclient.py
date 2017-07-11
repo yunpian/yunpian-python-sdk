@@ -6,8 +6,8 @@ Created on Jul 4, 2017
 import sys
 import unittest
 
-from sdk.model.constant import YP_VERSION, HTTP_CONN_TIMEOUT
-from sdk.ypclient import _YunpianConf
+from model.constant import YP_VERSION, HTTP_CONN_TIMEOUT
+from ypclient import _YunpianConf
 
 
 class TestYunpianClient(unittest.TestCase):

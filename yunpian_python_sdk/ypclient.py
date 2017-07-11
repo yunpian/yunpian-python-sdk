@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 '''Yunpian APIs' HttpClient
 
-Usage of YunpianClient:
+YunpianClient Usage:
     clnt = YunpianClient('apikey')
     # sms api
     r = clnt.sms().single_send({'mobile':'18616020***','text':'【云片网】您的验证码是1234'})
@@ -11,13 +12,12 @@ Created on Jun 18, 2017
 
 @author: dzh
 '''
-
 import json
 
 import requests
 
-from .api import flow, sign, sms, tpl, user, voice
-from .model.constant import (YP_APIKEY, CHARSET_UTF8, HTTP_CONN_TIMEOUT, HTTP_SO_TIMEOUT)
+from api import flow, sign, sms, tpl, user, voice
+from model.constant import (CHARSET_UTF8, YP_APIKEY, HTTP_CONN_TIMEOUT, HTTP_SO_TIMEOUT)
 
 
 class _YunpianConf(object):
@@ -173,3 +173,18 @@ class YunpianClient(object):
         rsp = requests.post(url, data, headers=headers,
                             timeout=(int(self.conf(HTTP_CONN_TIMEOUT, '10')), int(self.conf(HTTP_SO_TIMEOUT, '30'))))
         return json.loads(rsp.text)
+
+    def urlEncodeAndJoin(self, seq, sepr=','):
+        '''sepr.join(urlencode(seq))
+        Args:
+            seq: string list to be urlencoded
+            sepr: join seq with sepr
+        Returns:
+            str
+        '''
+        try:
+            from urllib.parse import quote_plus as encode
+            return sepr.join([encode(x, encoding=CHARSET_UTF8) for x in seq])
+        except ImportError:
+            from urllib import quote as encode
+            return sepr.join([i for i in map(lambda x: encode(x), seq)])

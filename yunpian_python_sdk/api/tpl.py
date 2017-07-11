@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 '''
 Created on Jun 19, 2017
 
 @author: dzh
 '''
-from ..model.constant import YP_TPL_HOST, APIKEY, VERSION_V2, VERSION_V1, TEMPLATE, TPL_CONTENT, TPL_ID
+from model.constant import (YP_TPL_HOST, APIKEY, VERSION_V2, VERSION_V1, TEMPLATE, TPL_CONTENT, TPL_ID)
+
 from .ypapi import YunpianApi, CommonResultHandler
 
 

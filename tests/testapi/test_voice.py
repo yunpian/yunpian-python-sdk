@@ -4,7 +4,8 @@ Created on Jul 4, 2017
 @author: dzh
 '''
 import unittest
-from api import TestYunpianApi
+
+from testapi import TestYunpianApi
 
 
 class TestVoiceApi(TestYunpianApi):
@@ -23,5 +24,5 @@ class TestVoiceApi(TestYunpianApi):
 
 
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testName']
+    # import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

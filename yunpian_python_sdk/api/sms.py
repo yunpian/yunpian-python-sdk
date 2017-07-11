@@ -1,11 +1,13 @@
+# -*- coding: utf-8 -*-
 '''
 Created on Jun 19, 2017
 
 @author: dzh
 '''
-from ..model.constant import (
+from model.constant import (
     YP_SMS_HOST, APIKEY, MOBILE, TEXT, VERSION_V1, RESULT, VERSION_V2, SMS_STATUS, SMS_REPLY, START_TIME,
     END_TIME, PAGE_NUM, PAGE_SIZE, SMS, TOTAL, TPL_ID, TPL_VALUE)
+
 from .ypapi import YunpianApi, CommonResultHandler
 
 
@@ -149,7 +151,7 @@ class SmsApi(YunpianApi):
         r = self.verify_param(param, [APIKEY])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(SMS_STATUS), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[SMS_STATUS] if SMS_STATUS in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('pull_status.json').post(param, h, r)
 
 
@@ -168,7 +170,7 @@ class SmsApi(YunpianApi):
         r = self.verify_param(param, [APIKEY])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(SMS_REPLY), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[SMS_REPLY] if SMS_REPLY in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('pull_reply.json').post(param, h, r)
 
 
@@ -193,7 +195,7 @@ class SmsApi(YunpianApi):
         r = self.verify_param(param, [APIKEY, START_TIME, END_TIME, PAGE_NUM, PAGE_SIZE])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(SMS_REPLY), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[SMS_REPLY] if SMS_REPLY in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_reply.json').post(param, h, r)
 
     def get_black_word(self, param={}):
@@ -211,7 +213,7 @@ class SmsApi(YunpianApi):
         r = self.verify_param(param, [APIKEY, TEXT])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(RESULT), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[RESULT] if RESULT in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_black_word.json').post(param, h, r)
 
 
@@ -234,7 +236,7 @@ class SmsApi(YunpianApi):
         r = self.verify_param(param, [APIKEY, START_TIME, END_TIME])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(SMS), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[SMS] if SMS in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_record.json').post(param, h, r)
 
     def count(self, param={}):

@@ -1,11 +1,12 @@
+# -*- coding: utf-8 -*-
 '''Basic Yunpian API
 Created on Jul 6, 2017
 
 @author: dzh
 '''
 
-from ..model.constant import VERSION_V2, YP_VERSION, CHARSET_UTF8, VERSION_V1, CODE, APIKEY, MSG, DETAIL, HTTP_CHARSET
-from ..model.result import Result, Code
+from model.constant import (VERSION_V2, YP_VERSION, CHARSET_UTF8, VERSION_V1, CODE, APIKEY, MSG, DETAIL, HTTP_CHARSET)
+from model.result import Result, Code
 
 
 class ResultHandler(object):
@@ -155,7 +156,7 @@ class YunpianApi(YunpianApiResult):
         '''
         try:
             rsp = self.client().post(self.uri(), param)
-            print(rsp)  # TODO del
+            print(rsp)
             return self.result(rsp, h, r)
         except ValueError as err:
             return h.catch_exception(err, r)

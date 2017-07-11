@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''Yunpian Constants
 Created on Jul 6, 2017
 

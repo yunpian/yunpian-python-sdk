@@ -5,9 +5,8 @@ Created on Jul 4, 2017
 '''
 import unittest
 
-from api import TestYunpianApi
-from sdk.model.constant import SIGN, NOTIFY, APPLYVIP, ISONLYGLOBAL, \
-    INDUSTRYTYPE, OLD_SIGN, PAGE_NUM, PAGE_SIZE
+from model.constant import (SIGN, NOTIFY, APPLYVIP, ISONLYGLOBAL, INDUSTRYTYPE, OLD_SIGN, PAGE_NUM, PAGE_SIZE)
+from testapi import TestYunpianApi
 
 
 class TestSignApi(TestYunpianApi):

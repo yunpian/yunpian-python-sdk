@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''yunpian-python-sdk
 
 Completely support Yunpian v1 and v2 APIs(https://www.yunpian.com/api2.0/howto.html).

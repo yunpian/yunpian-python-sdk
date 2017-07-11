@@ -3,11 +3,10 @@ Created on Jul 4, 2017
 
 @author: dzh
 '''
-
 import unittest
 
-from sdk.model.constant import *
-from sdk.ypclient import YunpianClient
+from model.constant import *
+from ypclient import YunpianClient
 
 
 class TestYunpianApi(unittest.TestCase):

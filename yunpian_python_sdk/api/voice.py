@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
 '''
 Created on Jun 19, 2017
 
 @author: dzh
 '''
-from ..model.constant import (
+from model.constant import (
     YP_VOICE_HOST, APIKEY, MOBILE, CODE, VERSION_V1, RESULT, VERSION_V2, VOICE_STATUS, TPL_ID, TPL_VALUE)
+
 from .ypapi import YunpianApi, CommonResultHandler
 
 

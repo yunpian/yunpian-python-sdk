@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 '''
 Created on Jun 19, 2017
 
 @author: dzh
 '''
-from ..model.constant import YP_USER_HOST, APIKEY, VERSION_V1, USER, VERSION_V2
+from model.constant import YP_USER_HOST, APIKEY, VERSION_V1, USER, VERSION_V2
+
 from .ypapi import YunpianApi, CommonResultHandler
 
 

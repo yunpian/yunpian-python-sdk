@@ -3,11 +3,10 @@ Created on Jul 4, 2017
 
 @author: dzh
 '''
-
 import unittest
 
-from api import TestYunpianApi
-from sdk.model.constant import VERSION_V1, MOBILE, SN
+from model.constant import VERSION_V1, MOBILE, SN
+from testapi import TestYunpianApi
 
 
 class TestFlowApi(TestYunpianApi):
