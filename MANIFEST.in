@@ -1,4 +1,4 @@
+recursive-exclude tests *
 include LICENSE README.md tox.ini
 include yunpian_python_sdk/yunpian.ini
-recursive-include tests *
 recursive-include docs *
