@@ -55,10 +55,10 @@ class CommonResultHandler(ResultHandler):
         self._func = func
 
     def succ(self, code, rsp, r):
-        return r.code(code, True).msg(rsp.get(MSG), True).data(self._func(rsp), True)
+        return r.code(code, True).msg(rsp[MSG] if MSG in rsp else None, True).data(self._func(rsp), True)
 
     def fail(self, code, rsp, r):
-        return r.code(code, True).msg(rsp.get(MSG), True).detail(rsp.get(DETAIL), True)
+        return r.code(code, True).msg(rsp[MSG] if MSG in rsp else None, True).detail(rsp[DETAIL] if DETAIL in rsp else None, True)
 
     def catch_exception(self, e, r):
         return r.code(Code.UNKNOWN_EXCEPTION, True).exception(e, True)
@@ -155,6 +155,7 @@ class YunpianApi(YunpianApiResult):
         '''
         try:
             rsp = self.client().post(self.uri(), param)
+            print(rsp)  # TODO del
             return self.result(rsp, h, r)
         except ValueError as err:
             return h.catch_exception(err, r)

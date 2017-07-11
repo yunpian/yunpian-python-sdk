@@ -3,7 +3,8 @@ Created on Jun 19, 2017
 
 @author: dzh
 '''
-from ..model.constant import (APIKEY, YP_FLOW_HOST, VERSION_V1, FLOW_PACKAGE, VERSION_V2, MOBILE, RESULT, FLOW_STATUS)
+
+from ..model.constant import (APIKEY, YP_FLOW_HOST, VERSION_V1, FLOW_PACKAGE, VERSION_V2, MOBILE, RESULT, FLOW_STATUS, SN)
 from .ypapi import YunpianApi, CommonResultHandler
 
 
@@ -29,7 +30,7 @@ class FlowApi(YunpianApi):
         r = self.verify_param(param, [APIKEY])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(FLOW_PACKAGE), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[FLOW_PACKAGE] if FLOW_PACKAGE in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_package.json').post(param, h, r)
 
     def recharge(self, param={}):
@@ -48,10 +49,10 @@ class FlowApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE])
+        r = self.verify_param(param, [APIKEY, MOBILE, SN])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(RESULT), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[RESULT] if RESULT in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('recharge.json').post(param, h, r)
 
     def pull_status(self, param={}):
@@ -69,5 +70,5 @@ class FlowApi(YunpianApi):
         r = self.verify_param(param, [APIKEY])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(FLOW_STATUS), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[FLOW_STATUS] if FLOW_STATUS in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('pull_status.json').post(param, h, r)

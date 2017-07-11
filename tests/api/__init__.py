@@ -19,7 +19,7 @@ class TestYunpianApi(unittest.TestCase):
             YP_USER_HOST:'https://test-api.yunpian.com', YP_VOICE_HOST:'https://test-api.yunpian.com'}
 
     def setUp(self):
-        self.clnt = YunpianClient(TestYunpianApi.APIKEY, TestYunpianApi.CONF)
+        self._clnt = YunpianClient(TestYunpianApi.APIKEY, TestYunpianApi.CONF)
         pass
 
 
@@ -29,6 +29,9 @@ class TestYunpianApi(unittest.TestCase):
     def toJson(self, obj):
         import json
         return json.dumps(obj.__dict__)
+
+    def show(self, obj):
+        print(self.toJson(obj))
 
 
 if __name__ == "__main__":

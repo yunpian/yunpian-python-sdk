@@ -6,25 +6,27 @@ Created on Jul 4, 2017
 import unittest
 
 from api import TestYunpianApi
+from sdk.model.constant import VERSION_V1
 
 
 class TestUserApi(TestYunpianApi):
     '''Test UserApi'''
 
 
-    def _testGet(self):
-        clnt = self.clnt
+    def test_get(self):
+        clnt = self._clnt
         r = clnt.user().get()
-        print(self.toJson(r))
+        self.show(r)
 
         # v1
-        # r = clnt.user().version(constants.VERSION_V1).get()
+        r = clnt.user().version(VERSION_V1).get()
+        self.show(r)
 
-    def _testSet(self):
-        clnt = self.clnt
+    def _test_set(self):
+        clnt = self._clnt
         param = {'emergency_mobile':'18616020000'}
         r = clnt.user().set(param)
-        print(self.toJson(r))
+        self.show(r)
 
 
 if __name__ == "__main__":
