@@ -61,9 +61,8 @@ SDK开源QQ群
 
 .. image:: /docs/sdk_qq.jpeg
    :height: 100px
-   :width: 200px
+   :width: 100px
    :scale: 15%
-
 
 文档链接
 --------
