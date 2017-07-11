@@ -152,7 +152,7 @@ class YunpianClient(object):
         Returns:
             api.voice.VoiceApi
         '''
-        return self._api.api("voice")
+        return self._api.api(voice.__name__)
 
     def conf(self, key=None, defval=None):
         '''return YunpianConf if key=None, else return value in YunpianConf'''

@@ -58,7 +58,7 @@ class VoiceApi(YunpianApi):
         r = self.verify_param(param, [APIKEY])
         if not r.is_succ():
             return r
-        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(VOICE_STATUS), VERSION_V2:rsp}[self.version()])
+        h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[VOICE_STATUS] if VOICE_STATUS in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('pull_status.json').post(param, h, r)
 
     def tpl_notify(self, param={}):
