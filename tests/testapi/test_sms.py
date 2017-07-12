@@ -6,10 +6,9 @@ Created on Jul 4, 2017
 '''
 import unittest
 
+from tests.testapi import TestYunpianApi
 from yunpian_python_sdk.model.constant import (
     MOBILE, TEXT, TPL_ID, TPL_VALUE, PAGE_SIZE, VERSION_V1, START_TIME, END_TIME, PAGE_NUM)
-
-from . import TestYunpianApi
 
 
 class TestSmsApi(TestYunpianApi):
