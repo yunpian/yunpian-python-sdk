@@ -43,11 +43,10 @@ v1.0.0不兼容之前版本\ `0.0.8 <https://github.com/yunpian/yunpian-python-s
 
 源码说明
 --------
--  接口方法参数的apikey默认传入`YunpianClient`构造时的apikey
+-  接口参数的apikey可以不传，因为所有接口默认传入`YunpianClient`构造时的apikey
 -  接口默认使用v2版本,可以在调用时指定版本,如\ ``clnt.sms().version('v1').single_send(param)``
--  API单元测试目录tests,支持tox.ini
--  分支说明: master是最新发布版本,develop是待发布的分支(开源贡献可以pull
-   request到develop分支)
+-  API单元测试目录tests,支持tox
+-  分支说明: master是最新发布版本,develop是待发布的分支(开源贡献可以pull request到develop分支)
 
 联系我们
 --------
@@ -58,8 +57,8 @@ QQ <https://static.meiqia.com/dist/standalone.html?eid=30951&groupid=0d20ab23ab4
 SDK开源QQ群: 106469530
 
 .. image:: docs/sdk_qq.jpeg
-   :height: 100px
-   :width: 100px
+   :height: 60px
+   :width: 60px
    :scale: 15%
 
 文档链接
