@@ -6,9 +6,8 @@ Created on Jul 4, 2017
 '''
 import unittest
 
+from tests.testapi import TestYunpianApi
 from yunpian_python_sdk.model.constant import (TPL_CONTENT, VERSION_V1, TPL_ID)
-
-from . import TestYunpianApi
 
 
 class TestTplApi(TestYunpianApi):
