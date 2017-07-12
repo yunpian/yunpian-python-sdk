@@ -32,16 +32,16 @@ class TestYunpianClient(unittest.TestCase):
         self.assertEqual('https://test-api.yunpian.com/v2/user/get.json', url)
 
 
-    def test_name(self):
+    def _test_name(self):
         import sys
         self.assertEqual('tests.test_ypclient', sys.modules[__name__].__name__)
 
-    def test_requests(self):
+    def _test_requests(self):
         r = requests.get('https://github.com/dzh')
-        print(r.status_code)
+        self.assertEqual(r.status_code, 200)
 
         r = requests.get('https://www.yunpian.com/')
-        print(r.status_code)
+        self.assertEqual(r.status_code, 200)
 
 
 if __name__ == "__main__":
