@@ -15,7 +15,7 @@ class TplApi(YunpianApi):
         super(TplApi, self)._init(clnt)
         self.host(clnt.conf(YP_TPL_HOST, 'https://sms.yunpian.com'))
 
-    def get_default(self, param={}):
+    def get_default(self, param=None, must=[APIKEY]):
         '''取默认模板
 
         参数名 类型 是否必须 描述 示例
@@ -27,14 +27,15 @@ class TplApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY])
+        param = {} if param is None else param
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[TEMPLATE] if TEMPLATE in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_default.json').post(param, h, r)
 
 
-    def get(self, param={}):
+    def get(self, param=None, must=[APIKEY]):
         '''取模板
 
         参数名 类型 是否必须 描述 示例
@@ -46,14 +47,15 @@ class TplApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY])
+        param = {} if param is None else param
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[TEMPLATE] if TEMPLATE in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get.json').post(param, h, r)
 
 
-    def add(self, param={}):
+    def add(self, param, must=[APIKEY, TPL_CONTENT]):
         '''添加模板
 
         参数名 类型 是否必须 描述 示例
@@ -69,13 +71,13 @@ class TplApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, TPL_CONTENT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(TEMPLATE), VERSION_V2:rsp}[self.version()])
         return self.path('add.json').post(param, h, r)
 
-    def del_tpl(self, param={}):
+    def del_tpl(self, param, must=[APIKEY, TPL_ID]):
         '''删除模板
         
         参数名 类型 是否必须 描述 示例
@@ -87,13 +89,13 @@ class TplApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, TPL_ID])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])
         return self.path('del.json').post(param, h, r)
 
-    def update(self, param={}):
+    def update(self, param, must=[APIKEY, TPL_ID, TPL_CONTENT]):
         '''修改模板
 
         参数名 类型 是否必须 描述 示例
@@ -111,14 +113,14 @@ class TplApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, TPL_ID, TPL_CONTENT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(TEMPLATE),
                                              VERSION_V2:rsp[TEMPLATE] if TEMPLATE in rsp else rsp}[self.version()])
         return self.path('update.json').post(param, h, r)
 
-    def add_voice_notify(self, param={}):
+    def add_voice_notify(self, param, must=[APIKEY, TPL_CONTENT]):
         '''添加语音通知模版
         
         访问方式：POST
@@ -133,13 +135,13 @@ class TplApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, TPL_CONTENT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])
         return self.path('add_voice_notify.json').post(param, h, r)
 
-    def update_voice_notify(self, param={}):
+    def update_voice_notify(self, param, must=[APIKEY, TPL_ID, TPL_CONTENT]):
         '''修改语音通知模版
         
         注意：模板成功修改之后需要重新审核才能使用！同时提醒您如果修改了变量，务必重新测试，以免替换出错!
@@ -154,7 +156,7 @@ class TplApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, TPL_ID, TPL_CONTENT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])

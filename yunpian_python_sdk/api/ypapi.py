@@ -67,7 +67,7 @@ class CommonResultHandler(ResultHandler):
 class YunpianApiResult(object):
     '''interface to retrieve the Result from the response'''
 
-    def result(self, rsp, h, r=Result()):
+    def result(self, rsp, h, r):
         '''
         Args:
             rsp: a dict representing api's response
@@ -147,7 +147,7 @@ class YunpianApi(YunpianApiResult):
         return '{}/{}/{}/{}'.format(self.host(), self.version(), self.name(), self.path())
 
 
-    def post(self, param, h, r=Result()):
+    def post(self, param, h, r):
         '''
         Args:
             param: request parameters
@@ -161,7 +161,7 @@ class YunpianApi(YunpianApiResult):
         except ValueError as err:
             return h.catch_exception(err, r)
 
-    def result(self, rsp, h, r=Result()):
+    def result(self, rsp, h, r):
         code = self.code(rsp, self.version())
         return h.succ(code, rsp, r) if code == Code.SUCC else h.fail(code, rsp, r)
 
@@ -177,11 +177,12 @@ class YunpianApi(YunpianApiResult):
 
         return code
 
-    def verify_param(self, param={}, must=[], r=Result()):
+    def verify_param(self, param, must=[], r=None):
         '''return Code.ARGUMENT_MISSING if every key in must not found in param'''
         if APIKEY not in param:
             param[APIKEY] = self.apikey()
 
+        r = Result() if r is None else r
         for p in must:
             if p not in param:
                 r.code(Code.ARGUMENT_MISSING).detail('missing-' + p)

@@ -11,10 +11,9 @@ from yunpian_python_sdk.model.constant import (
 from yunpian_python_sdk.ypclient import YunpianClient
 
 
-# from yunpian_python_sdk.model.constant import
 class TestYunpianApi(unittest.TestCase):
 
-    APIKEY = '2daab1114c69c9c41d1172b0ad8c392d'
+    APIKEY = '******'
 
     CONF = {YP_FLOW_HOST:'https://test-api.yunpian.com', YP_SIGN_HOST:'https://test-api.yunpian.com',
             YP_SMS_HOST:'https://test-api.yunpian.com', YP_TPL_HOST:'https://test-api.yunpian.com',

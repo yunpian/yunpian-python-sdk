@@ -17,7 +17,7 @@ class VoiceApi(YunpianApi):
         self.host(clnt.conf(YP_VOICE_HOST, 'https://voice.yunpian.com'))
 
 
-    def send(self, param={}):
+    def send(self, param, must=[APIKEY, MOBILE, CODE]):
         '''发语音验证码
 
         参数名 类型 是否必须 描述 示例
@@ -35,13 +35,13 @@ class VoiceApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, CODE])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(RESULT), VERSION_V2:rsp}[self.version()])
         return self.path('send.json').post(param, h, r)
 
-    def pull_status(self, param={}):
+    def pull_status(self, param=None, must=[APIKEY]):
         '''获取状态报告
 
         参数名 是否必须 描述 示例
@@ -54,13 +54,14 @@ class VoiceApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY])
+        param = {} if param is None else param
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[VOICE_STATUS] if VOICE_STATUS in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('pull_status.json').post(param, h, r)
 
-    def tpl_notify(self, param={}):
+    def tpl_notify(self, param, must=[APIKEY, MOBILE, TPL_ID, TPL_VALUE]):
         '''发送语音通知
         
         功能说明：通过电话直呼到用户手机(固话)播放指定模版内容的文本，默认播放1次。
@@ -80,7 +81,7 @@ class VoiceApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, TPL_ID, TPL_VALUE])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])

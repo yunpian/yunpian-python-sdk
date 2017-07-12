@@ -15,21 +15,21 @@ from . import TestYunpianApi
 class TestSmsApi(TestYunpianApi):
     '''Test SmsApi'''
 
-    def _test_single_send(self):
+    def test_single_send(self):
         clnt = self._clnt;
 
         param = {MOBILE:'18616020000', TEXT:'【云片网】您的验证码是1234'}
         r = clnt.sms().single_send(param)
         self.show(r)
 
-    def _test_batch_send(self):
+    def test_batch_send(self):
         clnt = self._clnt
 
         param = {MOBILE:'18616020000', TEXT:'【云片网】您的验证码是1234'}
         r = clnt.sms().batch_send(param)
         self.show(r)
 
-    def _test_multi_send(self):
+    def test_multi_send(self):
         clnt = self._clnt
         param = {MOBILE : '18616020610,18616020611',
             TEXT: clnt.urlEncodeAndJoin(['【哈哈哈】您的验证码,是1234', '【哈哈哈】您的验证码是1234'])}
@@ -37,7 +37,7 @@ class TestSmsApi(TestYunpianApi):
         self.show(r)
 
     # deprecated
-    def _test_tpl_single_send(self):
+    def test_tpl_single_send(self):
         clnt = self._clnt
 
         param = {MOBILE:'18616020000', TPL_ID:'1', TPL_VALUE:'#company#=云片网'}
@@ -45,14 +45,14 @@ class TestSmsApi(TestYunpianApi):
         self.show(r)
 
     # deprecated
-    def _test_tpl_batch_send(self):
+    def test_tpl_batch_send(self):
         clnt = self._clnt;
 
         param = {MOBILE :'18616020000', TPL_ID :'1', TPL_VALUE :'#company#=云片网'}
         r = clnt.sms().tpl_batch_send(param)
         self.show(r)
 
-    def _test_pull_status(self):
+    def test_pull_status(self):
         clnt = self._clnt;
 
         param = {PAGE_SIZE :'20'}
@@ -63,7 +63,7 @@ class TestSmsApi(TestYunpianApi):
         r = clnt.sms().version(VERSION_V1).pull_status(param)
         self.show(r)
 
-    def _test_pull_reply(self):
+    def test_pull_reply(self):
         clnt = self._clnt;
 
         param = {PAGE_SIZE :'20'}
@@ -74,7 +74,7 @@ class TestSmsApi(TestYunpianApi):
         r = clnt.sms().version(VERSION_V1).pull_reply(param)
         self.show(r)
 
-    def _test_get_record(self):
+    def test_get_record(self):
         clnt = self._clnt;
 
         param = {START_TIME : '2013-08-11 00:00:00', END_TIME : '2016-12-05 00:00:00', PAGE_NUM : '1',
@@ -86,7 +86,7 @@ class TestSmsApi(TestYunpianApi):
         r = clnt.sms().version(VERSION_V1).get_record(param)
         self.show(r)
 
-    def _test_get_black_word(self):
+    def test_get_black_word(self):
         clnt = self._clnt
 
         param = {TEXT: '高利贷,发票'}
@@ -99,14 +99,14 @@ class TestSmsApi(TestYunpianApi):
 
 
     # deprecated
-    def _test_send(self):
+    def test_send(self):
         clnt = self._clnt
 
         param = {MOBILE:'18616020000', TEXT : '【云片网】您的验证码是1234'}
         r = clnt.sms().version(VERSION_V1).send(param)
         self.show(r)
 
-    def _test_get_reply(self):
+    def test_get_reply(self):
         clnt = self._clnt
 
         param = {START_TIME: '2013-08-11 00:00:00', END_TIME : '2016-12-05 00:00:00', PAGE_NUM : '1',
@@ -119,14 +119,14 @@ class TestSmsApi(TestYunpianApi):
         self.show(r)
 
     # deprecated
-    def _test_tpl_send(self):
+    def test_tpl_send(self):
         clnt = self._clnt
 
         param = {MOBILE : '18616020000', TPL_ID : '1', TPL_VALUE :'#company#=云片网'}
         r = clnt.sms().version(VERSION_V1).tpl_send(param)
         self.show(r)
 
-    def _test_count(self):
+    def test_count(self):
         clnt = self._clnt;
 
         param = {START_TIME : '2013-08-11 00:00:00', END_TIME :'2016-12-05 00:00:00', PAGE_NUM : '1',
