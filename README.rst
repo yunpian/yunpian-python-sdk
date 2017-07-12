@@ -66,7 +66,7 @@ SDK开源QQ群: 106469530
 
 -  `API文档 <https://www.yunpian.com/api2.0/guide.html>`__
 
-其他SDK
+可选SDK
 -------
 
 -  https://github.com/yunpian/sms/tree/master/yunpian/python/ypclient
