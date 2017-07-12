@@ -14,7 +14,7 @@ from . import TestYunpianApi
 class TestVoiceApi(TestYunpianApi):
     '''Test VoiceApi'''
 
-    def _test_send(self):
+    def test_send(self):
         clnt = self._clnt
 
         param = {MOBILE : '18616020000', CODE: '1234'}
@@ -25,7 +25,7 @@ class TestVoiceApi(TestYunpianApi):
         r = clnt.voice().version(VERSION_V1).send(param)
         self.show(r)
 
-    def _test_pull_status(self):
+    def test_pull_status(self):
         clnt = self._clnt
 
         param = {PAGE_SIZE : '10'}
@@ -36,7 +36,7 @@ class TestVoiceApi(TestYunpianApi):
         r = clnt.voice().version(VERSION_V1).pull_status(param)
         self.show(r)
 
-    def _test_tpl_notify(self):
+    def test_tpl_notify(self):
         clnt = self._clnt
 
         param = {MOBILE:'18616020000', TPL_ID : '1', TPL_VALUE:'name=dzh&time=2'}

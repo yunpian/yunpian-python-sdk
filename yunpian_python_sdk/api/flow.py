@@ -16,7 +16,7 @@ class FlowApi(YunpianApi):
         super(FlowApi, self)._init(clnt)
         self.host(clnt.conf(YP_FLOW_HOST, 'https://flow.yunpian.com'))
 
-    def get_package(self, param={}):
+    def get_package(self, param=None, must=[APIKEY]):
         '''查询流量包
         
         参数名 类型 是否必须 描述 示例
@@ -28,13 +28,14 @@ class FlowApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY])
+        param = {} if param is None else param
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[FLOW_PACKAGE] if FLOW_PACKAGE in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_package.json').post(param, h, r)
 
-    def recharge(self, param={}):
+    def recharge(self, param, must=[APIKEY, MOBILE, SN]):
         '''充值流量
         
         参数名 类型 是否必须 描述 示例
@@ -50,13 +51,13 @@ class FlowApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, SN])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[RESULT] if RESULT in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('recharge.json').post(param, h, r)
 
-    def pull_status(self, param={}):
+    def pull_status(self, param=None, must=[APIKEY]):
         '''获取状态报告
         
         参数名 是否必须 描述 示例
@@ -68,7 +69,8 @@ class FlowApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY])
+        param = {} if param is None else param
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[FLOW_STATUS] if FLOW_STATUS in rsp else None, VERSION_V2:rsp}[self.version()])

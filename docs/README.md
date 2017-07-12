@@ -27,13 +27,13 @@ r = clnt.sms().single_send(param)
 **注**: v1.0.0不兼容之前版本[0.0.8](https://github.com/yunpian/yunpian-python-sdk/releases/tag/0.0.8)
 
 ## 配置说明 (默认配置就行)
-- 默认配置文件 yunpian_python_sdk/yunpian.ini
 - 构造器配置
     - `YunpianClient('apikey')`
     - `YunpianClient('apikey',conf)`, conf字典key详见model.constant.YP_*
 - apikey的优先级:接口的param[APIKEY] > 构造器的apikey > 构造器的conf[YP_APIKEY]
 
 ## 源码说明
+- 接口方法参数的apikey默认传入`YunpianClient`构造时的apikey
 - 接口默认使用v2版本,可以在调用时指定版本,如`clnt.sms().version('v1').single_send(param)`
 - API单元测试目录tests,支持tox.ini
 - 分支说明: master是最新发布版本,develop是待发布的分支(开源贡献可以pull request到develop分支)

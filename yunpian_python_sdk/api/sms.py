@@ -17,7 +17,7 @@ class SmsApi(YunpianApi):
         super(SmsApi, self)._init(clnt)
         self.host(clnt.conf(YP_SMS_HOST, 'https://sms.yunpian.com'))
 
-    def send(self, param={}):
+    def send(self, param, must=[APIKEY, MOBILE, TEXT]):
         '''智能匹配模板发送 only v1 deprecated
         
         参数名 类型 是否必须 描述 示例
@@ -39,7 +39,7 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, TEXT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(RESULT)}[self.version()])
@@ -47,7 +47,7 @@ class SmsApi(YunpianApi):
 
 
 
-    def single_send(self, param={}):
+    def single_send(self, param, must=[APIKEY, MOBILE, TEXT]):
         '''单条发送
         
         参数名 类型 是否必须 描述 示例
@@ -70,14 +70,14 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, TEXT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])
         return self.path('single_send.json').post(param, h, r)
 
 
-    def batch_send(self, param={}):
+    def batch_send(self, param, must=[APIKEY, MOBILE, TEXT]):
         '''批量发送
         
         参数名 类型 是否必须 描述 示例
@@ -97,14 +97,14 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, TEXT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])
         return self.path('batch_send.json').post(param, h, r)
 
 
-    def multi_send(self, param={}):
+    def multi_send(self, param, must=[APIKEY, MOBILE, TEXT]):
         '''个性化发送
         
         参数名 类型 是否必须 描述 示例
@@ -128,14 +128,14 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, TEXT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp, VERSION_V2:rsp}[self.version()])
         return self.path('multi_send.json').post(param, h, r)
 
 
-    def pull_status(self, param={}):
+    def pull_status(self, param=None, must=[APIKEY]):
         '''获取状态报告
         
         参数名 类型 是否必须 描述 示例
@@ -147,14 +147,14 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY])
+        param = {} if param is None else param
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[SMS_STATUS] if SMS_STATUS in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('pull_status.json').post(param, h, r)
 
-
-    def pull_reply(self, param={}):
+    def pull_reply(self, param=None, must=[APIKEY]):
         '''获取回复短信
         
         参数名 类型 是否必须 描述 示例
@@ -166,14 +166,15 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY])
+        param = {} if param is None else param
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[SMS_REPLY] if SMS_REPLY in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('pull_reply.json').post(param, h, r)
 
 
-    def get_reply(self, param={}):
+    def get_reply(self, param, must=[APIKEY, START_TIME, END_TIME, PAGE_NUM, PAGE_SIZE]):
         '''查回复的短信
         
         参数名 类型 是否必须 描述 示例
@@ -191,13 +192,13 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, START_TIME, END_TIME, PAGE_NUM, PAGE_SIZE])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[SMS_REPLY] if SMS_REPLY in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_reply.json').post(param, h, r)
 
-    def get_black_word(self, param={}):
+    def get_black_word(self, param, must=[APIKEY, TEXT]):
         '''查屏蔽词
         
         参数名 类型 是否必须 描述 示例
@@ -209,14 +210,14 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, TEXT])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[RESULT] if RESULT in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_black_word.json').post(param, h, r)
 
 
-    def get_record(self, param={}):
+    def get_record(self, param, must=[APIKEY, START_TIME, END_TIME]):
         '''查短信发送记录
         
         参数名 类型 是否必须 描述 示例
@@ -232,13 +233,13 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, START_TIME, END_TIME])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp[SMS] if SMS in rsp else None, VERSION_V2:rsp}[self.version()])
         return self.path('get_record.json').post(param, h, r)
 
-    def count(self, param={}):
+    def count(self, param, must=[APIKEY, START_TIME, END_TIME]):
         '''统计短信条数
         
         参数名 类型 是否必须 描述 示例
@@ -254,13 +255,13 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, START_TIME, END_TIME])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: int(rsp[TOTAL]) if TOTAL in rsp else 0)
         return self.path('count.json').post(param, h, r)
 
-    def tpl_send(self, param={}):
+    def tpl_send(self, param, must=[APIKEY, MOBILE, TPL_ID, TPL_VALUE]):
         '''指定模板发送 only v1 deprecated
         
         参数名 类型 是否必须 描述 示例
@@ -281,13 +282,13 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, TPL_ID, TPL_VALUE])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V1:rsp.get(RESULT)}[self.version()])
         return self.path('tpl_send.json').post(param, h, r)
 
-    def tpl_single_send(self, param={}):
+    def tpl_single_send(self, param, must=[APIKEY, MOBILE, TPL_ID, TPL_VALUE]):
         '''指定模板单发 only v2 deprecated
 
         参数名 类型 是否必须 描述 示例
@@ -310,14 +311,14 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, TPL_ID, TPL_VALUE])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])
         return self.path('tpl_single_send.json').post(param, h, r)
 
 
-    def tpl_batch_send(self, param={}):
+    def tpl_batch_send(self, param, must=[APIKEY, MOBILE, TPL_ID, TPL_VALUE]):
         '''指定模板群发 only v2 deprecated
 
         参数名 类型 是否必须 描述 示例
@@ -340,7 +341,7 @@ class SmsApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, MOBILE, TPL_ID, TPL_VALUE])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp}[self.version()])
