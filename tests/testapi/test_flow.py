@@ -14,7 +14,7 @@ from . import TestYunpianApi
 class TestFlowApi(TestYunpianApi):
     '''Test FlowApi'''
 
-    def _test_get_package(self):
+    def test_get_package(self):
         clnt = self._clnt
 
         r = clnt.flow().get_package()
@@ -24,7 +24,7 @@ class TestFlowApi(TestYunpianApi):
         r = clnt.flow().version(VERSION_V1).get_package()
         self.show(r)
 
-    def _test_recharge(self):
+    def test_recharge(self):
         clnt = self._clnt
 
         param = {MOBILE : '18616020000', SN : '1008601'}
@@ -35,7 +35,7 @@ class TestFlowApi(TestYunpianApi):
         r = clnt.flow().version(VERSION_V1).recharge(param)
         self.show(r)
 
-    def _test_pull_status(self):
+    def test_pull_status(self):
         clnt = self._clnt
 
         r = clnt.flow().pull_status()

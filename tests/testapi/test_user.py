@@ -14,7 +14,7 @@ from . import TestYunpianApi
 class TestUserApi(TestYunpianApi):
     '''Test UserApi'''
 
-    def _test_get(self):
+    def test_get(self):
         clnt = self._clnt
         r = clnt.user().get()
         self.show(r)
@@ -23,7 +23,7 @@ class TestUserApi(TestYunpianApi):
         r = clnt.user().version(VERSION_V1).get()
         self.show(r)
 
-    def _test_set(self):
+    def test_set(self):
         clnt = self._clnt
         param = {'emergency_mobile':'18616020000'}
         r = clnt.user().set(param)

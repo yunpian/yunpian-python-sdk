@@ -15,7 +15,7 @@ class SignApi(YunpianApi):
         super(SignApi, self)._init(clnt)
         self.host(clnt.conf(YP_SIGN_HOST, 'https://sms.yunpian.com'))
 
-    def add(self, param={}):
+    def add(self, param, must=[APIKEY, SIGN]):
         '''添加签名API
         
         参数名 类型 是否必须 描述 示例
@@ -33,13 +33,13 @@ class SignApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, SIGN])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp[SIGN]}[self.version()])
         return self.path('add.json').post(param, h, r)
 
-    def update(self, param={}):
+    def update(self, param, must=[APIKEY, OLD_SIGN]):
         '''修改签名API
         
         仅“审核中”或者“审核失败”的签名可以进行修改，修改后会重新提交给客服审核。
@@ -60,13 +60,13 @@ class SignApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY, OLD_SIGN])
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp[SIGN]}[self.version()])
         return self.path('update.json').post(param, h, r)
 
-    def get(self, param={}):
+    def get(self, param=None, must=[APIKEY]):
         '''获取签名API
         
         参数名 类型 是否必须 描述 示例
@@ -81,7 +81,8 @@ class SignApi(YunpianApi):
         Results:
             Result
         '''
-        r = self.verify_param(param, [APIKEY])
+        param = {} if param is None else param
+        r = self.verify_param(param, must)
         if not r.is_succ():
             return r
         h = CommonResultHandler(lambda rsp: {VERSION_V2:rsp[SIGN]}[self.version()])

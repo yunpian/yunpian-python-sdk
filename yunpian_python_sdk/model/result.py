@@ -57,18 +57,18 @@ class Result(object):
             return self
         return self._detail
 
-    def data(self, data, ret_r=False):
+    def data(self, data=None, ret_r=False):
         '''response data'''
         if data or ret_r:
             self._data = data
             return self
-        return self
+        return self._data
 
-    def exception(self, err, ret_r=False):
+    def exception(self, err=None, ret_r=False):
         if err or ret_r:
             self._err = err
-            return self._err
-        return self
+            return self
+        return self._err
 
     def is_succ(self):
         return self._code == Code.SUCC

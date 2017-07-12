@@ -14,7 +14,7 @@ from . import TestYunpianApi
 class TestTplApi(TestYunpianApi):
     '''Test TplApi'''
 
-    def _test_add(self):
+    def test_add(self):
         clnt = self._clnt
 
         param = {TPL_CONTENT : '【云片网】您的验证码是#code#'}
@@ -25,7 +25,7 @@ class TestTplApi(TestYunpianApi):
         r = clnt.tpl().version(VERSION_V1).add(param)
         self.show(r)
 
-    def _test_get(self):
+    def test_get(self):
         clnt = self._clnt
 
         param = {TPL_ID : '1'}
@@ -36,7 +36,7 @@ class TestTplApi(TestYunpianApi):
         r = clnt.tpl().version(VERSION_V1).get(param)
         self.show(r)
 
-    def _test_del(self):
+    def test_del(self):
         clnt = self._clnt
 
         param = {TPL_ID : '1'}
@@ -47,7 +47,7 @@ class TestTplApi(TestYunpianApi):
         r = clnt.tpl().version(VERSION_V1).del_tpl(param)
         self.show(r)
 
-    def _test_get_default(self):
+    def test_get_default(self):
         clnt = self._clnt
 
         param = {TPL_ID : '1'}
@@ -58,7 +58,7 @@ class TestTplApi(TestYunpianApi):
         r = clnt.tpl().version(VERSION_V1).get_default(param)
         self.show(r)
 
-    def _test_update(self):
+    def test_update(self):
         clnt = self._clnt
 
         param = {TPL_ID : '1', TPL_CONTENT : '【云片网】您的验证码是#code#'}
@@ -69,14 +69,14 @@ class TestTplApi(TestYunpianApi):
         r = clnt.tpl().version(VERSION_V1).update(param)
         self.show(r)
 
-    def _test_add_voice_notify(self):
+    def test_add_voice_notify(self):
         clnt = self._clnt
 
         param = {TPL_CONTENT : '您的验证码是#code#'}
         r = clnt.tpl().add_voice_notify(param)
         self.show(r)
 
-    def _test_update_voice_notify(self):
+    def test_update_voice_notify(self):
         clnt = self._clnt
 
         param = {TPL_ID:'3405', TPL_CONTENT : '您的验证码是1#code#'}
