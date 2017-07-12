@@ -13,7 +13,7 @@ from yunpian_python_sdk.ypclient import YunpianClient
 
 class TestYunpianApi(unittest.TestCase):
 
-    APIKEY = 'bc3c4f272d8e39c53695f9d3feb7e9c6'
+    APIKEY = '******'
 
     CONF = {YP_FLOW_HOST:'https://test-api.yunpian.com', YP_SIGN_HOST:'https://test-api.yunpian.com',
             YP_SMS_HOST:'https://test-api.yunpian.com', YP_TPL_HOST:'https://test-api.yunpian.com',
