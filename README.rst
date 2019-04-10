@@ -29,7 +29,9 @@ yunpian-python-sdk
         # 短信:clnt.sms() 账户:clnt.user() 签名:clnt.sign() 模版:clnt.tpl() 语音:clnt.voice() 流量:clnt.flow()
 
 **注**:
-v1.0.0不兼容之前版本\ `0.0.8 <https://github.com/yunpian/yunpian-python-sdk/releases/tag/0.0.8>`__
+v1.0.0不兼容之前版本\ `0.0.8 <https://github.com/yunpian/yunpian-python-sdk/releases/tag/0.0.8>`__   
+## 视频教程
+[使用视频教程](http://oss-standard.oss-cn-hangzhou.aliyuncs.com/yunpian/app/apiweb/pythonSDK.mp4)   
 
 配置说明 (默认配置就行)
 -----------------------
