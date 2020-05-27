@@ -25,6 +25,7 @@ YP_SMS_HOST = 'yp.sms.host'
 YP_VOICE_HOST = 'yp.voice.host'
 YP_FLOW_HOST = 'yp.flow.host'
 YP_CALL_HOST = 'yp.call.host'
+YP_VSMS_HOST = 'yp.vsms.host'
 
 # ************************** api ************************************
 VERSION_V1 = 'v1'
@@ -133,3 +134,10 @@ TOTAL_FEE = 'total_fee'
 SEPERATOR_COMMA = ','
 
 RECORD_ID = 'record_id'
+
+LAYOUT = 'layout'
+MATERIAL = 'material'
+CERTIFICATE_FILE_SUFFIX = 'certificate_file_suffix'
+CERTIFICATE_FILE_CONTENTS = 'certificate_file_contents'
+LICENSE_FILE_SUFFIX = 'license_file_suffix'
+LICENSE_FILE_CONTENTS = 'license_file_contents'
