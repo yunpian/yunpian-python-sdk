@@ -146,7 +146,6 @@ class YunpianApi(YunpianApiResult):
     def uri(self):
         return '{}/{}/{}/{}'.format(self.host(), self.version(), self.name(), self.path())
 
-
     def post(self, param, h, r):
         '''
         Args:
@@ -156,6 +155,21 @@ class YunpianApi(YunpianApiResult):
         '''
         try:
             rsp = self.client().post(self.uri(), param)
+            # print(rsp)
+            return self.result(rsp, h, r)
+        except ValueError as err:
+            return h.catch_exception(err, r)
+
+    def post_multipart(self, param, file, h, r):
+        """
+        Args:
+            param: request parameters
+            file: the part of file
+            h: ResultHandler
+            r: YunpianApiResult
+        """
+        try:
+            rsp = self.client().post_multipart(self.uri(), param, file)
             # print(rsp)
             return self.result(rsp, h, r)
         except ValueError as err:
