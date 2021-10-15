@@ -64,7 +64,7 @@ SDK开源QQ群: 106469530
 文档链接
 --------
 
--  `API文档 <https://www.yunpian.com/api2.0/guide.html>`__
+-  `API文档 <https://www.yunpian.com/dev-doc>`__
 
 可选SDK
 -------
