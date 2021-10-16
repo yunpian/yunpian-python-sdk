@@ -16,7 +16,7 @@ import json
 
 import requests
 
-from .api import flow, sign, sms, tpl, user, voice
+from .api import flow, sign, sms, tpl, user, voice, vsms
 from .model.constant import (CHARSET_UTF8, YP_APIKEY, HTTP_CONN_TIMEOUT, HTTP_SO_TIMEOUT)
 
 
@@ -35,7 +35,8 @@ class _YunpianConf(object):
                'yp.sms.host':'https://sms.yunpian.com',
                'yp.voice.host':'https://voice.yunpian.com',
                'yp.flow.host':'https://flow.yunpian.com',
-               'yp.call.host':'https://call.yunpian.com'
+               'yp.call.host':'https://call.yunpian.com',
+               'yp.vsms.host': 'https://vsms.yunpian.com'
     }
 
     def __init__(self):
@@ -98,6 +99,8 @@ class _ApiFactory(object):
             api = user.UserApi()
         elif voice.__name__ == name:
             api = voice.VoiceApi()
+        elif vsms.__name__ == name:
+            api = vsms.VsmsApi()
 
         assert api, "not found api-" + name
 
@@ -172,6 +175,14 @@ class YunpianClient(object):
         '''
         return self._api.api(voice.__name__)
 
+    def vsms(self):
+        """
+        vsms api
+        Returns:
+            api.vsms.VsmsApi
+        """
+        return self._api.api(vsms.__name__)
+
     def conf(self, key=None, defval=None):
         '''return YunpianConf if key=None, else return value in YunpianConf'''
         if key is None:
@@ -189,6 +200,14 @@ class YunpianClient(object):
         if 'Content-Type' not in headers:
             headers['Content-Type'] = "application/x-www-form-urlencoded;charset=" + charset
         rsp = requests.post(url, data, headers=headers,
+                            timeout=(int(self.conf(HTTP_CONN_TIMEOUT, '10')), int(self.conf(HTTP_SO_TIMEOUT, '30'))))
+        return json.loads(rsp.text)
+
+    def post_multipart(self, url, data, file, headers={}):
+        '''response json text'''
+        if 'Api-Lang' not in headers:
+            headers['Api-Lang'] = 'python'
+        rsp = requests.post(url, data=data, files=file, headers=headers,
                             timeout=(int(self.conf(HTTP_CONN_TIMEOUT, '10')), int(self.conf(HTTP_SO_TIMEOUT, '30'))))
         return json.loads(rsp.text)
 
